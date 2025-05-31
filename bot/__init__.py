@@ -10,19 +10,17 @@ from logging.handlers import RotatingFileHandler
 
 from .translation import Translation
 
-# Change Accordingly While Deploying To A VPS
-APP_ID = int(os.environ.get("12618934"))
+# ✅ Correctly retrieve environment variables by their variable names
+APP_ID = int(os.environ.get("APP_ID"))
+API_HASH = os.environ.get("API_HASH")
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
+DB_URI = os.environ.get("DB_URI")
+USER_SESSION = os.environ.get("USER_SESSION")  # Optional if not using userbot
 
-API_HASH = os.environ.get("49aacd0bc2f8924add29fb02e20c8a16")
-
-BOT_TOKEN = os.environ.get("7693803634:AAFIWfW8gfzMYv-G5-I9hAnge1mYFVkspio")
-
-DB_URI = os.environ.get("mongodb+srv://batman13:batman13@batman.sawvl.mongodb.net/?retryWrites=true&w=majority&appName=batman")
-
-USER_SESSION = os.environ.get("USER_SESSION")
-
+# Optional dictionary (you can initialize or populate this elsewhere)
 VERIFY = {}
 
+# Logging configuration
 logging.basicConfig(
     level=logging.INFO,
     format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
@@ -30,7 +28,7 @@ logging.basicConfig(
     handlers=[
         RotatingFileHandler(
             "autofilterbot.txt",
-            maxBytes=50000000,
+            maxBytes=50_000_000,  # 50MB
             backupCount=10
         ),
         logging.StreamHandler()
@@ -38,8 +36,9 @@ logging.basicConfig(
 )
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
+# Store bot start time
 start_uptime = time.time()
 
-
+# Function to get a logger
 def LOGGER(name: str) -> logging.Logger:
     return logging.getLogger(name)
