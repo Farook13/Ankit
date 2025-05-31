@@ -9,7 +9,7 @@ from logging.handlers import RotatingFileHandler
 from .translation import Translation  # Make sure this module exists
 
 # ✅ Environment variables with optional default values for local testing
-API_ID = int(os.environ.get('API_ID', '12618934'))
+APP_ID = int(os.environ.get('API_ID', '12618934'))
 API_HASH = os.environ.get('API_HASH', '49aacd0bc2f8924add29fb02e20c8a16')
 BOT_TOKEN = os.environ.get('BOT_TOKEN', '7693803634:AAFIWfW8gfzMYv-G5-I9hAnge1mYFVkspio')
 DB_URI = os.environ.get('DB_URI', 'mongodb+srv://batman13:batman13@batman.sawvl.mongodb.net/?retryWrites=true&w=majority&appName=batman')
