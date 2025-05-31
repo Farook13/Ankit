@@ -5,40 +5,38 @@
 import os
 import logging
 import time
-
 from logging.handlers import RotatingFileHandler
+from .translation import Translation  # Make sure this module exists
 
-from .translation import Translation
+# ✅ Environment variables with optional default values for local testing
+API_ID = int(os.environ.get('API_ID', '12618934'))
+API_HASH = os.environ.get('API_HASH', '49aacd0bc2f8924add29fb02e20c8a16')
+BOT_TOKEN = os.environ.get('BOT_TOKEN', '7693803634:AAFIWfW8gfzMYv-G5-I9hAnge1mYFVkspio')
+DB_URI = os.environ.get('DB_URI', 'mongodb+srv://batman13:batman13@batman.sawvl.mongodb.net/?retryWrites=true&w=majority&appName=batman')
+USER_SESSION = os.environ.get('USER_SESSION', '')  # Optional if not using userbot
 
-# ✅ Correctly retrieve environment variables by their variable names
-APP_ID = int(os.environ.get("APP_ID"))
-API_HASH = os.environ.get("API_HASH")
-BOT_TOKEN = os.environ.get("BOT_TOKEN")
-DB_URI = os.environ.get("DB_URI")
-USER_SESSION = os.environ.get("USER_SESSION")  # Optional if not using userbot
-
-# Optional dictionary (you can initialize or populate this elsewhere)
+# Dictionary placeholder (use as needed)
 VERIFY = {}
 
-# Logging configuration
+# ✅ Logging configuration
 logging.basicConfig(
     level=logging.INFO,
     format="[%(asctime)s - %(levelname)s] - %(name)s - %(message)s",
     datefmt='%d-%b-%y %H:%M:%S',
     handlers=[
         RotatingFileHandler(
-            "autofilterbot.txt",
+            "autofilterbot.txt",  # Log file
             maxBytes=50_000_000,  # 50MB
-            backupCount=10
+            backupCount=10        # Rotate after 10 logs
         ),
         logging.StreamHandler()
     ]
 )
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
-# Store bot start time
+# ✅ Track bot start time
 start_uptime = time.time()
 
-# Function to get a logger
+# ✅ Logger function
 def LOGGER(name: str) -> logging.Logger:
     return logging.getLogger(name)
